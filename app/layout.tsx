@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+// import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/components/theme/ThemeContext";
+import Header from "@/components/header";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "@/lib/store";
+import { Provider } from "react-redux";
+import ReduxProvider from "./reduxProvider";
+import Footer from "@/components/footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,9 +32,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col antialiased`}
       >
-        {children}
+        <ReduxProvider>
+          <ThemeProvider>
+            <Header />
+            <main className="flex-1 ml-5 mr-5"> {children}</main>
+            <Footer />
+          </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
