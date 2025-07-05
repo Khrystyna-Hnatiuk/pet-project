@@ -1,6 +1,6 @@
 "use client";
 
-import zodresol, { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,7 +27,7 @@ import { useTheme } from "@/components/theme/ThemeContext";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
 
-export default function signUpPage() {
+export default function SignUpPage() {
   const { theme } = useTheme();
   const router = useRouter();
   const [createUserWithEmailAndPassword] =
