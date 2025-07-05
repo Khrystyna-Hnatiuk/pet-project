@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react"; 
 import useFavorites from "@/configs/hooks/useFavorite";
 import { useTheme } from "@/components/theme/ThemeContext";
-import axios from "axios";
+// import axios from "axios";
 import Link from "next/link";
 import FavoriteCard from "@/app/favorites/favoriteCard/page";
 
