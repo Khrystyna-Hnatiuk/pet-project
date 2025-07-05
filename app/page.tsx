@@ -1,11 +1,11 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 import { useTheme } from "@/components/theme/ThemeContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RecipeCard from "./recipes/recipeCard/page";
 export default function Main() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     axios

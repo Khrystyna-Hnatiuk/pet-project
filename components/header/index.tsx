@@ -1,7 +1,7 @@
 "use client";
 
 import { headerLinks } from "@/components/header/config";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "../theme/ThemeContext";
 import ButtonTheme from "../theme/buttonTheme";
@@ -16,19 +16,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
+// import { Skeleton } from "@/components/ui/skeleton";
 import { RouteName } from "@/configs/constants";
 // import { auth } from "@/lib/firebase/config";
 // import { useCartSelector } from "@/lib/store/selectors";
 import clsx from "clsx";
-import { FlameIcon, MenuIcon, ShoppingCartIcon } from "lucide-react";
+import { FlameIcon, MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 // import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Header() {
   const pathname = usePathname();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   //   const [user, isLoading] = useAuthState(auth);
 
