@@ -5,7 +5,16 @@ import { useTheme } from "@/components/theme/ThemeContext";
 import Link from "next/link";
 import FavoriteCard from "@/app/favorites/favoriteCard/page";
 
-const RecipeCard = ({ recipes }: { recipes: any[] }) => {
+type Recipe = {
+  id: string;
+  title: string;
+  image: string;
+  category: string;
+  time: string;
+  ingredients: string[];
+};
+
+const RecipeCard = ({ recipes }: { recipes: Recipe[] }) => {
   const { theme } = useTheme();
   const { isFavorite, toggleFavorite } = useFavorites();
 

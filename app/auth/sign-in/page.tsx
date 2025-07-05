@@ -49,8 +49,8 @@ export default function SignInPage() {
 
       router.push(RouteName.DASHBOARD);
       setIsSubmitting(false);
-    } catch (error) {
-      toast.error("Failed tp sign in");
+    } catch {
+      toast.error("Failed to sign in");
     }
   }
   return (

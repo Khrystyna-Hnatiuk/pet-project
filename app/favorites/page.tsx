@@ -10,7 +10,7 @@ import { IFavorite } from "@/types/favorites";
 import { RootState } from "@/lib/store";
 const activeLightFavorite = '/images/activeFacouriteLight.svg'
 const FavoritesPage = () => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const dispatch = useDispatch();
   const favorites = useSelector((state: RootState) => state.favorites.items);
 
