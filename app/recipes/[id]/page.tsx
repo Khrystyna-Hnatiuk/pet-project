@@ -11,13 +11,13 @@ interface Recipe {
   instructions: string;
 }
 
-interface Props {
+interface PageProps {
   params: {
     id: string;
   };
 }
 
-const RecipeDetails = async ({ params }: Props) => {
+const RecipeDetails = async ({ params }: PageProps) => {
   const { id } = params;
 
   // Якщо хочеш Server Component, можна отримати дані тут:
