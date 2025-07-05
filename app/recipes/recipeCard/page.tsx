@@ -3,7 +3,7 @@ import useFavorites from "@/configs/hooks/useFavorite";
 // import { useTheme } from "@/components/theme/ThemeContext";
 // import axios from "axios";
 import Link from "next/link";
-import FavoriteCard from "@/app/favorites/favoriteCard/page";
+import FavoriteCard from "@/app/favorites/favoriteCard";
 interface IProduct {
     id:number;
     title:string;
