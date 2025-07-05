@@ -1,26 +1,26 @@
-import React from "react"; 
+import React from "react";
 import useFavorites from "@/configs/hooks/useFavorite";
-import { useTheme } from "@/components/theme/ThemeContext";
+// import { useTheme } from "@/components/theme/ThemeContext";
 // import axios from "axios";
 import Link from "next/link";
 import FavoriteCard from "@/app/favorites/favoriteCard/page";
+interface IProduct {
+    id:number;
+    title:string;
+    category:string;
+    ingredients:string[];
+    instructions:string;
+    time: string;
+    image:string;
+}
 
-type Recipe = {
-  id: string;
-  title: string;
-  image: string;
-  category: string;
-  time: string;
-  ingredients: string[];
-};
-
-const RecipeCard = ({ recipes }: { recipes: Recipe[] }) => {
-  const { theme } = useTheme();
+const RecipeCard = ({ recipes }: { recipes: IProduct[] }) => {
+  // const { theme } = useTheme();
   const { isFavorite, toggleFavorite } = useFavorites();
 
   return (
     <div>
-      {recipes.map((recipe: any) => (
+      {recipes.map((recipe: IProduct) => (
         <div
           key={recipe.id}
           className="border mb-4 p-4 pb-10 rounded shadow bg-white"
