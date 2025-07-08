@@ -1,3 +1,4 @@
+import { type FC } from "react";
 import axios from "axios";
 
 interface Recipe {
@@ -10,11 +11,13 @@ interface Recipe {
   instructions: string;
 }
 
-export default async function RecipeDetails({
-  params,
-}: {
-  params: { id: string };
-}) {
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+const RecipeDetails = async ({ params }: Props) => {
   const { id } = params;
 
   const res = await axios.get(`http://localhost:3001/api/recipes/${id}`);
@@ -38,4 +41,6 @@ export default async function RecipeDetails({
       </p>
     </div>
   );
-}
+};
+
+export default RecipeDetails;
