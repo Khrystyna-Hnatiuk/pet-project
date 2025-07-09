@@ -9,7 +9,7 @@ export default function Main() {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/recipes")
+      .get("/api/recipes")
       .then((res) => {
         setRecipes(res.data.slice(0, 5));
       })
