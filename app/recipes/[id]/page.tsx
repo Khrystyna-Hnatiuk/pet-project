@@ -1,4 +1,5 @@
 import axios from "axios";
+import { JSX } from "react";
 
 interface Recipe {
   id: number;
@@ -10,14 +11,14 @@ interface Recipe {
   instructions: string;
 }
 
-type Props = {
-  params: {
-    id: string;
-  };
+type PageProps= {
+  params:  Promise<{id:string}>;
 };
 
-const RecipeDetails = async ({ params }: Props) => {
-  const { id } = params;
+export default async function RecipeDetails({ params }: PageProps): Promise<JSX.Element> {
+    const resolvedParams = await params;
+
+  const { id } = resolvedParams;
 
   const res = await axios.get(`http://localhost:3001/api/recipes/${id}`);
   const recipe: Recipe = res.data;
@@ -26,20 +27,10 @@ const RecipeDetails = async ({ params }: Props) => {
     <div style={{ padding: 20 }}>
       <h1 className="mb-3">{recipe.title}</h1>
       <img src={recipe.image} alt={recipe.title} width={300} />
-      <p>
-        <strong>Category:</strong> {recipe.category}
-      </p>
-      <p>
-        <strong>Time:</strong> {recipe.time}
-      </p>
-      <p>
-        <strong>Ingredients:</strong> {recipe.ingredients.join(", ")}
-      </p>
-      <p>
-        <strong>Instructions:</strong> {recipe.instructions}
-      </p>
+      <p><strong>Category:</strong> {recipe.category}</p>
+      <p><strong>Time:</strong> {recipe.time}</p>
+      <p><strong>Ingredients:</strong> {recipe.ingredients.join(", ")}</p>
+      <p><strong>Instructions:</strong> {recipe.instructions}</p>
     </div>
   );
-};
-
-export default RecipeDetails;
+}

@@ -3,7 +3,7 @@
 import { useTheme } from "@/components/theme/ThemeContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import RecipeCard from "./recipes/recipeCard/page";
+import RecipeCard from "./recipes/recipeCard/recipeCard";
 export default function Main() {
   const { theme } = useTheme();
   const [recipes, setRecipes] = useState([]);
