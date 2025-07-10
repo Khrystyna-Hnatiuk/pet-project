@@ -1,10 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 
 const recipes = [
-  // ті самі рецепти, що і в recipes/route.ts
   {
     id: 1,
-    title: "Borscht",
+    title: "dfv",
     category: "Soup",
     ingredients: ["pepper", "flour", "beef", "carrot", "onion", "egg"],
     instructions: "Cook borscht as usual.",
@@ -19,8 +18,8 @@ const recipes = [
     ingredients: ["flour", "milk", "egg", "butter"],
     instructions: "Mix ingredients and fry.",
     time: "15 minutes",
-    image: "https://example.com/pancakes.jpg",
-  },
+image:
+      "https://i.pinimg.com/736x/f0/60/22/f060223c88f9ec7dbc56abc937f51562.jpg",  },
   {
     id: 3,
     title: "Syrnyky",
