@@ -19,24 +19,22 @@ export default function Main() {
   }, []);
 
   return (
-    <div className={`flex w-full gap-10 mt-10 px-8`}>
-      <div className={`w-3/5`}>
-        <div className="flex gap-2 items-center">
+    <div className="flex flex-col lg:flex-row w-full gap-10 mt-10 px-4">
+      <div className="w-full lg:w-3/5">
+        <div className="flex flex-col sm:flex-row gap-2 items-center w-full">
           <input
             className={`w-full h-[50px] border border-transparent focus:border-[rgb(80,6,6)] pl-[10px] outline-none rounded ${
               theme === "dark" ? "bg-white text-[rgb(50,6,6)]" : "bg-white"
-            }
-           
-            `}
+            }`}
             type="text"
             placeholder="Enter an ingredient or dish name"
           />
           <button
-            className={`px-4 py-2 ${
+            className={`px-4 py-2 rounded h-[50px] w-full sm:w-[130px] ${
               theme === "dark"
-                ? "bg-white  text-[rgb(80,6,6)]  "
-                : "bg-[rgb(80,6,6)] text-white "
-            } w-[30%] h-[50px] rounded`}
+                ? "bg-white text-[rgb(80,6,6)]"
+                : "bg-[rgb(80,6,6)] text-white"
+            }`}
           >
             Get recipe
           </button>
@@ -46,9 +44,10 @@ export default function Main() {
       <div
         style={{
           border: "1px solid",
-          borderColor: theme === "dark" ? "rgb(80, 72, 72)" : "rgb(230, 223, 223)",
+          borderColor:
+            theme === "dark" ? "rgb(80, 72, 72)" : "rgb(230, 223, 223)",
         }}
-        className='w-2/5 min-h-[400px] rounded p-4 ' 
+        className="w-full lg:w-2/5 min-h-[400px] rounded p-4"
       >
         <h2 className="text-center text-[25px] mb-4">Popular recipes</h2>
         <div

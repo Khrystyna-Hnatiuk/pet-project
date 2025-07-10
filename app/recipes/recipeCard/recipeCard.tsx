@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Link from "next/link";
 import FavoriteCard from "@/app/favorites/favoriteCard";
@@ -26,12 +26,12 @@ const RecipeCard: React.FC<Props> = ({ recipes }) => {
       {recipes.map((recipe) => (
         <div
           key={recipe.id}
-          className="border mb-4 p-4 pb-10 rounded shadow bg-white"
+  className="border mb-4 p-4 pb-2 sm:pb-10 rounded shadow bg-white w-full sm:w-[90%] mx-auto text-xs sm:text-base"
         >
           <img
             src={recipe.image}
             alt={recipe.title}
-            className="w-full h-48  object-cover mb-3 rounded"
+            className="w-full h-32 sm:h-48 max-h-60 object-cover mb-3 rounded"
           />
           <h2 className="text-xl font-semibold mb-4">{recipe.title}</h2>
           <p>
@@ -58,6 +58,6 @@ const RecipeCard: React.FC<Props> = ({ recipes }) => {
       ))}
     </div>
   );
-}
+};
 
-export default RecipeCard
+export default RecipeCard;
