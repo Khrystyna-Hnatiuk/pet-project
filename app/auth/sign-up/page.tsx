@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import * as z from "zod";
 import { signUpSchema } from "./config";
 import { Button } from "@/components/ui/button";
@@ -60,7 +60,8 @@ export default function SignUpPage() {
     toast.success("Welcome!You successfully signed up!");
     console.log("ok");
     form.reset();
-    router.push(RouteName.DASHBOARD);
+    
+    // router.push(RouteName.DASHBOARD);
     setIsSubmitting(false);
   }
 
@@ -143,6 +144,7 @@ export default function SignUpPage() {
           </Link>
         </form>
       </Form>
+
     </section>
   );
 }

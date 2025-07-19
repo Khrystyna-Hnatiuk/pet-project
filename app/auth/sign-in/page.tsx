@@ -9,7 +9,7 @@ import { LoaderCircleIcon } from "lucide-react";
 import { RouteName } from "@/configs/constants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -47,7 +47,7 @@ export default function SignInPage() {
       toast.success("Welcome! You successfully signed in");
       form.reset();
 
-      router.push(RouteName.DASHBOARD);
+      // router.push(RouteName.DASHBOARD);
       setIsSubmitting(false);
     } catch {
       toast.error("Failed to sign in");

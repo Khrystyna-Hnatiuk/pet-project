@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 // import { ThemeProvider } from "next-themes";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
 import Header from "@/components/header";
@@ -39,6 +40,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1 ml-5 mr-5"> {children}</main>
             <Footer />
+            <Toaster/>
           </ThemeProvider>
         </ReduxProvider>
       </body>

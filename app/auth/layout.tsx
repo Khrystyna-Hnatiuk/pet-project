@@ -1,6 +1,7 @@
 "use client";
 import { auth } from "@/lib/firebase/config";
 import { RouteName } from "@/configs/constants";
+import { Toaster } from "sonner";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,9 +15,9 @@ export default function AuthLayout({
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && user) {
-      router.push(RouteName.DASHBOARD);
-    }
+    // if (!loading && user) {
+    //   router.push(RouteName.SIGN_IN);
+    // }
   }, [user, loading, router]);
 
   if (loading || user) {
