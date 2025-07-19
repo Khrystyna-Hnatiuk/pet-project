@@ -8,7 +8,6 @@ import { auth } from "@/lib/firebase/config";
 import { LoaderCircleIcon } from "lucide-react";
 import { RouteName } from "@/configs/constants";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useState } from "react";
@@ -26,7 +25,6 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useTheme } from "@/components/theme/ThemeContext";
 
 export default function SignInPage() {
-  const router = useRouter();
   const { theme } = useTheme();
 
   const [signInUserWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);

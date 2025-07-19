@@ -21,7 +21,6 @@ import { auth } from "@/lib/firebase/config";
 import { LoaderCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { DbCollectionName, RouteName } from "@/configs/constants";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@/components/theme/ThemeContext";
 import { setDoc, doc } from "firebase/firestore";
@@ -29,7 +28,6 @@ import { db } from "@/lib/firebase/config";
 
 export default function SignUpPage() {
   const { theme } = useTheme();
-  const router = useRouter();
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
 
