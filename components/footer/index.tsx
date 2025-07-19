@@ -1,8 +1,6 @@
-// "use client";
-// import { useTheme } from "../theme/ThemeContext";
+
 
 export default function Footer() {
-//   const { theme } = useTheme();
   return (
     <footer
       className=' w-full mt-2 

@@ -9,7 +9,7 @@ import { LoaderCircleIcon } from "lucide-react";
 import { RouteName } from "@/configs/constants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";

@@ -1,7 +1,6 @@
 "use client";
 import { auth } from "@/lib/firebase/config";
-import { RouteName } from "@/configs/constants";
-import { Toaster } from "sonner";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
