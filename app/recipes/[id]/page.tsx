@@ -20,8 +20,8 @@ export default async function RecipeDetails({ params }: PageProps): Promise<JSX.
 
   const { id } = resolvedParams;
 
-const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/recipes/${id}`);
-  const recipe: Recipe = res.data;
+const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/recipes/${id}`);
+  const recipe: Recipe = await res.json();
 
   return (
     <div style={{ padding: 20 }}>
