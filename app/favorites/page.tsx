@@ -1,14 +1,13 @@
 "use client";
 // import { useTheme } from "@/components/theme/ThemeContext";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { clearFavorite } from "@/lib/store/features/favorites/favoritesSlice";
 
-
 import { IFavorite } from "@/types/favorites";
 import { RootState } from "@/lib/store";
-const activeLightFavorite = '/images/activeFacouriteLight.svg'
+const activeLightFavorite = "/images/activeFacouriteLight.svg";
 const FavoritesPage = () => {
   // const { theme } = useTheme();
   const dispatch = useDispatch();

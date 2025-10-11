@@ -3,15 +3,18 @@
 import { useTheme } from "@/components/theme/ThemeContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { IFavorite } from "@/types/favorites";
 import RecipeCard from "./recipes/recipeCard/recipeCard";
 export default function Main() {
   const { theme } = useTheme();
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState<IFavorite[]>([]);
+  const [filteredRecipes, setFilterRecipes] = useState<IFavorite[]>([]);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     axios
       .get("/api/recipes")
       .then((res) => {
-        setRecipes(res.data.slice(0, 5));
+        setRecipes(res.data);
       })
       .catch((err) => {
         console.log("Error fetching recipes", err);
@@ -23,6 +26,8 @@ export default function Main() {
       <div className="w-full lg:w-3/5">
         <div className="flex flex-col sm:flex-row gap-2 items-center w-full">
           <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className={`w-full h-[50px] border border-transparent focus:border-[rgb(80,6,6)] pl-[10px] outline-none rounded ${
               theme === "dark" ? "bg-white text-[rgb(50,6,6)]" : "bg-white"
             }`}
@@ -30,6 +35,18 @@ export default function Main() {
             placeholder="Enter an ingredient or dish name"
           />
           <button
+            onClick={() => {
+              const filtered = recipes.filter((recipe) => {
+                const searchLower = search.trim().toLowerCase();
+                const inTitle = recipe.title.toLowerCase().includes(searchLower);
+                const ingredient = recipe.ingredients
+                  .join(" ")
+                  .toLowerCase()
+                  .includes(searchLower);
+                return inTitle || ingredient;
+              });
+              setFilterRecipes(filtered);
+            }}
             className={`px-4 py-2 rounded h-[50px] w-full sm:w-[130px] ${
               theme === "dark"
                 ? "bg-white text-[rgb(80,6,6)]"
@@ -55,7 +72,11 @@ export default function Main() {
             theme === "dark" ? " text-[rgb(80,6,6)]" : "text-[rgb(80,6,6)]"
           }`}
         >
-          <RecipeCard recipes={recipes} />
+          <RecipeCard
+            recipes={
+              filteredRecipes.length ? filteredRecipes : recipes.slice(0, 5)
+            }
+          />
         </div>
       </div>
     </div>

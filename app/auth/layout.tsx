@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { LoaderCircleIcon } from "lucide-react";
+import { RouteName } from "@/configs/constants";
 export default function AuthLayout({
   children,
 }: {
@@ -14,9 +15,9 @@ export default function AuthLayout({
   const router = useRouter();
 
   useEffect(() => {
-    // if (!loading && user) {
-    //   router.push(RouteName.SIGN_IN);
-    // }
+    if (!loading && user) {
+      router.push(RouteName.DASHBOARD);
+    }
   }, [user, loading, router]);
 
   if (loading || user) {

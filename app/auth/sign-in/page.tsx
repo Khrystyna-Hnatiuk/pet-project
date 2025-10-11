@@ -8,9 +8,10 @@ import { auth } from "@/lib/firebase/config";
 import { LoaderCircleIcon } from "lucide-react";
 import { RouteName } from "@/configs/constants";
 import Link from "next/link";
+// import Router from "next/router";
 import { toast } from "sonner";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -23,12 +24,36 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useTheme } from "@/components/theme/ThemeContext";
-
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/configs/hooks/useAuth";
 export default function SignInPage() {
   const { theme } = useTheme();
+  const router = useRouter();
 
-  const [signInUserWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+  // const [signInUserWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
+  const [
+    signInWithEmailAndPassword,
+    userCredential,
+    loadingSignIn,
+    errorSignIn,
+  ] = useSignInWithEmailAndPassword(auth);
+
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      router.push(RouteName.DASHBOARD);
+    }
+  }, [user, router]);
+
+  // if (loading) return <p>Loading...</p>;
+
+  // Якщо вже увійшов — переспрямуй
+  // if (user) {
+  //   router.push(RouteName.DASHBOARD);
+  //   return <p>Redirecting...</p>;
+  // }
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -38,19 +63,22 @@ export default function SignInPage() {
     },
   });
 
+  if (loading) return <p>Loading...</p>;
+  if (user) return <p>Redirecting...</p>;
   async function onSubmit({ email, password }: z.infer<typeof signInSchema>) {
     setIsSubmitting(true);
     try {
-      await signInUserWithEmailAndPassword(email, password);
+      await signInWithEmailAndPassword(email, password);
       toast.success("Welcome! You successfully signed in");
       form.reset();
-
-      // router.push(RouteName.DASHBOARD);
-      setIsSubmitting(false);
-    } catch {
+      router.push(RouteName.DASHBOARD);
+    } catch (error) {
       toast.error("Failed to sign in");
+    } finally {
+      setIsSubmitting(false);
     }
   }
+
   return (
     <section className="flex items-center justify-center">
       <Form {...form}>
@@ -96,9 +124,15 @@ export default function SignInPage() {
               )}
             />
           </div>
-          <Button disabled={isSubmitting} className={`flex ${theme==='dark' ? 'bg-[rgb(247,230,230)] text-[rgb(60,6,6)]': 'bg-[rgb(60,6,6)] text-white ' } `} type="submit">
-
-          
+          <Button
+            disabled={isSubmitting}
+            className={`flex ${
+              theme === "dark"
+                ? "bg-[rgb(247,230,230)] text-[rgb(60,6,6)]"
+                : "bg-[rgb(60,6,6)] text-white "
+            } `}
+            type="submit"
+          >
             {isSubmitting && <LoaderCircleIcon className="animate-spin" />} Sign
             in
           </Button>
