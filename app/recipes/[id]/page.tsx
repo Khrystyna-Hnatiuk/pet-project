@@ -1,4 +1,3 @@
-import axios from "axios";
 import { JSX } from "react";
 
 interface Recipe {
