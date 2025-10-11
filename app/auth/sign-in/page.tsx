@@ -33,9 +33,7 @@ export default function SignInPage() {
   // const [signInUserWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const [
     signInWithEmailAndPassword,
-    userCredential,
-    loadingSignIn,
-    errorSignIn,
+   
   ] = useSignInWithEmailAndPassword(auth);
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
