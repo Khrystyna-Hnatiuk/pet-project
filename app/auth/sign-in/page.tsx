@@ -31,10 +31,7 @@ export default function SignInPage() {
   const router = useRouter();
 
   // const [signInUserWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-  const [
-    signInWithEmailAndPassword,
-   
-  ] = useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { user, loading } = useAuth();
@@ -70,7 +67,7 @@ export default function SignInPage() {
       toast.success("Welcome! You successfully signed in");
       form.reset();
       router.push(RouteName.DASHBOARD);
-    } catch (error) {
+    } catch {
       toast.error("Failed to sign in");
     } finally {
       setIsSubmitting(false);
