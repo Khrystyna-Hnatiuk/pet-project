@@ -1,10 +1,11 @@
 "use client";
 
 import { headerLinks } from "@/components/header/config";
-// import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "../theme/ThemeContext";
 import ButtonTheme from "../theme/buttonTheme";
+import { auth } from "@/lib/firebase/config";
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -16,43 +17,42 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-// import { Skeleton } from "@/components/ui/skeleton";
 import { RouteName } from "@/configs/constants";
-// import { auth } from "@/lib/firebase/config";
-// import { useCartSelector } from "@/lib/store/selectors";
 import clsx from "clsx";
-import { FlameIcon, MenuIcon } from "lucide-react";
+import { FlameIcon, MenuIcon, LoaderCircleIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Header() {
   const pathname = usePathname();
   const { theme } = useTheme();
+  const [user, isLoading] = useAuthState(auth);
 
-  //   const [user, isLoading] = useAuthState(auth);
-
-  //   const { items } = useCartSelector();
-
-  //   const cartQuantityTotal = items.reduce((sum, item) => sum + item.quantity, 0);
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+    } catch (err) {
+      console.error("Error signing out:", err);
+    }
+  };
 
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6 border-b">
+      {/* Mobile menu */}
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="lg:hidden">
             <MenuIcon className="h-6 w-6" />
-
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
+
         <ButtonTheme />
 
         <SheetContent side="left" className="p-6">
           <SheetTitle>
             <Link href={RouteName.MAIN}>
               <FlameIcon className="h-6 w-6" />
-              <span className="sr-only"></span>
             </Link>
           </SheetTitle>
 
@@ -74,9 +74,9 @@ export default function Header() {
         </SheetContent>
       </Sheet>
 
+      {/* Desktop Navigation */}
       <Link href={RouteName.MAIN} className="mr-6 hidden lg:flex">
         <FlameIcon className="h-6 w-6" />
-        <span className="sr-only"></span>
       </Link>
 
       <NavigationMenu className="hidden lg:flex">
@@ -96,38 +96,40 @@ export default function Header() {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div className="ml-auto flex gap-2">
-        {/* <Link href={RouteName.CART} className='relative'>
-          <Button variant='outline' size='icon'>
-            {cartQuantityTotal > 0 && (
-              <Badge
-                className='absolute left-0 top-0 -translate-y-1/2 -translate-x-1/2 text-[12px] leading-none px-1 font-bold
-'
+      {/* Auth Section */}
+      <div className="ml-auto flex gap-2 items-center">
+        {isLoading ? (
+          <LoaderCircleIcon className="animate-spin" />
+        ) : user ? (
+          <>
+            <span className="text-sm">
+              👋 {user.email?.split("@")[0]}
+            </span>
+            <Link href={RouteName.DASHBOARD}>
+              <Button variant="outline">Dashboard</Button>
+            </Link>
+            <Button variant="outline" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          </>
+        ) : (
+          <>
+            <Link href={RouteName.SIGN_IN}>
+              <Button variant="outline">Sign in</Button>
+            </Link>
+            <Link href={RouteName.SIGN_UP}>
+              <Button
+                className={` ${
+                  theme === "light"
+                    ? "bg-[rgb(60,6,6)] text-white"
+                    : "bg-[rgb(247,230,230)] text-[rgb(60,6,6)]"
+                } `}
               >
-                {cartQuantityTotal}
-              </Badge>
-            )}
-
-            <ShoppingCartIcon className='h-6 w-6' />
-          </Button>
-        </Link> */}
-
-        {/* {isLoading ? (
-          <Skeleton className='h-9 w-[106px]' />
-        ) : user ? ( */}
-        <Link href={RouteName.DASHBOARD}>
-          <Button variant="outline">Dashboard</Button>
-        </Link>
-        {/* ) : ( */}
-        <>
-          <Link href={RouteName.SIGN_IN}>
-            <Button variant="outline">Sign in</Button>
-          </Link>
-          <Link href={RouteName.SIGN_UP}>
-            <Button className={` ${theme==='light'? 'bg-[rgb(60,6,6)]' :'bg-[rgb(247,230,230)]'} `}>Sign Up</Button>
-          </Link>
-        </>
-        {/* )} */}
+                Sign Up
+              </Button>
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );
