@@ -20,7 +20,7 @@ export default async function RecipeDetails({ params }: PageProps): Promise<JSX.
 
   const { id } = resolvedParams;
 
-  const res = await axios.get(`http://localhost:3001/api/recipes/${id}`);
+const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/recipes/${id}`);
   const recipe: Recipe = res.data;
 
   return (

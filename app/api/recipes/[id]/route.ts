@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 const recipes = [
   {
     id: 1,
-    title: "dfv",
+    title: "Borscht",
     category: "Soup",
     ingredients: ["pepper", "flour", "beef", "carrot", "onion", "egg"],
     instructions: "Cook borscht as usual.",
