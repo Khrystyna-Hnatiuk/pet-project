@@ -10,6 +10,7 @@ export default function Main() {
   const [recipes, setRecipes] = useState<IFavorite[]>([]);
   const [filteredRecipes, setFilterRecipes] = useState<IFavorite[]>([]);
   const [search, setSearch] = useState("");
+  const [visibleCount, setVisibleCount] = useState(5);
   useEffect(() => {
     axios
       .get("/api/recipes")
@@ -74,9 +75,15 @@ export default function Main() {
         >
           <RecipeCard
             recipes={
-              filteredRecipes.length ? filteredRecipes : recipes.slice(0, 5)
-            }
-          />
+filteredRecipes.length ? filteredRecipes.slice(0, visibleCount) : recipes.slice(0, visibleCount)            }
+          />{(filteredRecipes.length ? filteredRecipes : recipes).length > visibleCount && (
+  <button
+    onClick={() => setVisibleCount((prev) => prev + 5)}
+    className="mt-4 w-full py-2 rounded bg-[rgb(80,6,6)] text-white"
+  >
+    Show more
+  </button>
+)}
         </div>
       </div>
     </div>
